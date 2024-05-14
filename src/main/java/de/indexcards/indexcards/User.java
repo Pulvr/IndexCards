@@ -10,17 +10,6 @@ public class User {
     private String password;
     private List<Card> userCards = new LinkedList<Card>();
 
-
-    public static void main(String[] args) {
-        Card card1 = new Card("Hello", "Hallo");
-        User user1 = new User();
-
-        user1.getUserCards().add(card1);
-
-        System.out.println(user1.getUserCards().get(0).getCardFront());
-
-    }
-
     public String getName() {
         return name;
     }
