@@ -1,6 +1,5 @@
 package de.indexcards.indexcards;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,7 +7,7 @@ public class User {
     private String name;
     private String username;
     private String password;
-    private List<Card> userCards = new LinkedList<Card>();
+    private List<Card> userCards = new LinkedList<>();
 
     public String getName() {
         return name;
