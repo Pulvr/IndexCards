@@ -1,4 +1,4 @@
-package de.indexcards.indexcards;
+package de.indexcards.indexcards.classes;
 
 public class Card {
     private String cardFront;

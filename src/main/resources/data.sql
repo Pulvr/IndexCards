@@ -1,11 +1,24 @@
-DROP TABLE IF EXISTS Student; -- Optional. May be useful if the H2 database is permanently stored on the hard disk and not in memory.
-CREATE TABLE IF NOT EXISTS Student (
-                                       id LONG PRIMARY KEY AUTO_INCREMENT,
-                                       name VARCHAR(100) NOT NULL,
-                                       semester INT NOT NULL
+DROP TABLE IF EXISTS USERS;
+CREATE TABLE IF NOT EXISTS USERS
+(
+    id          LONG PRIMARY KEY AUTO_INCREMENT,
+    username    VARCHAR(100) NOT NULL,
+    firstName   VARCHAR(100) NOT NULL,
+    lastName    VARCHAR(100) NOT NULL,
+    email       VARCHAR(100) NOT NULL,
+    password    VARCHAR(100) NOT NULL
 );
-INSERT INTO Student(name, semester)
-VALUES ('Elon', 1),
-       ('Bill', 2),
-       ('Sara', 3),
-       ('Kira', 2);
+DROP TABLE IF EXISTS DECK;
+CREATE TABLE IF NOT EXISTS DECK
+(
+    id      LONG PRIMARY KEY AUTO_INCREMENT,
+    name    VARCHAR(100) NOT NULL,
+    user_id LONG NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES USERS(id)
+);
+
+INSERT INTO USERS(username, firstName,lastName,email,password)
+VALUES  ('elondestroyer','Elon', 'Mah', 'something@bla', 'password123'),
+        ('LisanAlGaib','Paul', 'Atreides', 'spice@stuff.com', 'brummsibumm');
+
+INSERT INTO DECK(name, user_id) VALUES ( 'Japanese' , 1 ),('fremen',2);
