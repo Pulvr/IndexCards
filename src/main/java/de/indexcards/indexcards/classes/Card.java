@@ -9,19 +9,4 @@ public class Card {
         this.cardBack = cardBack;
     }
 
-    public String getCardFront() {
-        return cardFront;
-    }
-
-    public void setCardFront(String cardFront) {
-        this.cardFront = cardFront;
-    }
-
-    public String getCardBack() {
-        return cardBack;
-    }
-
-    public void setCardBack(String cardBack) {
-        this.cardBack = cardBack;
-    }
 }

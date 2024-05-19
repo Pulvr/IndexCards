@@ -9,8 +9,8 @@ public class Deck {
 
     @Id
     private long id;
-    @Column("DECK_NAME")
-    private String name;
+    @Column("DECKNAME")
+    private String deckName;
 
     private long userId;
 
