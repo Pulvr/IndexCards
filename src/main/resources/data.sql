@@ -21,4 +21,5 @@ INSERT INTO USERS(USERNAME, FIRSTNAME,LASTNAME,EMAIL,PASSWORD)
 VALUES  ('elondestroyer','Elon', 'Mah', 'something@bla', 'password123'),
         ('LisanAlGaib','Paul', 'Atreides', 'spice@stuff.com', 'brummsibumm');
 
-INSERT INTO DECK(DECKNAME, USER_ID) VALUES ( 'Japanese' , 1 ),('fremen',2);
+INSERT INTO DECK(DECKNAME, USER_ID) VALUES ( 'Japanese' , 1 ),( 'English' , 1 ),('fremen',2);
+

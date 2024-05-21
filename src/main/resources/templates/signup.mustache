@@ -4,23 +4,23 @@
     <title>Sign up for IndexCards</title>
 </head>
 <body>
-<form action="dashboard" method="get">
+<form action="/dashboard" method="POST">
     <h1>Sign up</h1>
     <h3>You need to sign up to use IndexCards.</h3>
     <h5>* required</h5>
-    <label>Username*:</label>
-    <input type="text" fistName="username" placeholder="Username" required>
+    <label>Username*:<input type="text" name="username" placeholder="Username" required></label>
     <br>
-    <label>Email address*:</label>
-    <input type="email" fistName="email" placeholder="Email address" required>
+    <label>First Name*:<input type="text" name="firstName" placeholder="First Name" required></label>
     <br>
-    <label>Password*:</label>
-    <input type="password" fistName="password" placeholder="Password" required>
-    <label>Repeat password*:</label>
-    <input type="password" fistName="password" placeholder="Repeat password" required>
+    <label>Surname*:<input type="text" name="lastName" placeholder="Surname" required></label>
     <br>
+    <label>Email address*:<input type="email" name="email" placeholder="Email address" required></label>
     <br>
-    <button type="submit">Sign up now</button>
+    <label>Password*:<input type="password" name="password" placeholder="Password" required></label>
+    <br>
+    <label>Repeat password*:<input type="password" name="passwordRep" placeholder="Repeat password" required></label>
+    <br>
+    <input type="submit" value="Registrieren">
 </form>
 </body>
 </html>

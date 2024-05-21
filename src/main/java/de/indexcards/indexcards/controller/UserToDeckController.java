@@ -22,13 +22,11 @@ public class UserToDeckController {
 
     @GetMapping("/myUsers")
     String serveTemplate(Model model) {
-        //var newUser = new Users("Pietro","lobo","bestman","mymail@mail.de","123");
-        //userRepository.save(newUser);
 
         List<Users> myUsers = userRepository.findAll();
-        List<Deck> myDecks = deckRepository.findAll();
+        List<Deck> usersDecks = deckRepository.findDecksByUserName(myUsers.getFirst().getUserName());
         model.addAttribute("myUsers", myUsers);
-        model.addAttribute("myDecks", myDecks);
+        model.addAttribute("usersDecks", usersDecks);
 
         return "myUsers";
     }
