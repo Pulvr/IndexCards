@@ -16,6 +16,7 @@ public class MainController {
     public String index() {
         return "index";
     }
+
     @GetMapping("/signup")
     public String signup() {
         return "signup";
@@ -42,4 +43,7 @@ public class MainController {
 
     @GetMapping("/learning")
     public String learning() {return "learning";}
+
+    @GetMapping("/imprintandprivacy")
+    public String imprintandprivacy() {return "imprintandprivacy";}
 }
