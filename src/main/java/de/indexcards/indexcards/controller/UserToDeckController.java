@@ -24,10 +24,14 @@ public class UserToDeckController {
     String serveTemplate(Model model) {
 
         List<Users> myUsers = userRepository.findAll();
-        List<Deck> usersDecks = deckRepository.findDecksByUserName(myUsers.getFirst().getUserName());
-        model.addAttribute("myUsers", myUsers);
-        model.addAttribute("usersDecks", usersDecks);
+        List<Deck> allDecks = deckRepository.findAll();
+        //List<Deck> decksFirstUser = deckRepository.findDecksById(myUsers.getFirst().getId());
+        //var firstUserID = decksFirstUser.getFirst().getUserId();
 
+        model.addAttribute("myUsers", myUsers);
+        model.addAttribute("allDecks", allDecks);
+        //model.addAttribute("usersDecks", allDecks);
+        //model.addAttribute("firstUserID", firstUserID);
         return "myUsers";
     }
 

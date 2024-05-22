@@ -7,6 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("DECK")
 public class Deck {
 
+
     @Id
     private long id;
     @Column("DECKNAME")
@@ -16,8 +17,15 @@ public class Deck {
 
     public Deck(){}
 
-    public Deck(String name) {
+    public Deck(String deckName) {
+        this.deckName = deckName;
+    }
 
+    public long getId() {
+        return id;
+    }
+    public long getUserId() {
+        return userId;
     }
 
 }

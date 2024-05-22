@@ -20,8 +20,8 @@ public class Users {
     private String lastName;
 
     private String email;
-    private String password;
 
+    private String password;
     public Users(){
 
     }
@@ -36,6 +36,10 @@ public class Users {
 
     public String getUserName() {
         return userName;
+    }
+
+    public long getId() {
+        return id;
     }
 
 }

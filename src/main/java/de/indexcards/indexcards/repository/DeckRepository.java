@@ -14,4 +14,11 @@ public interface DeckRepository extends ListCrudRepository<Deck, Long> {
            WHERE lower(USERS.USERNAME) = lower(:name)
            """)
     List<Deck> findDecksByUserName(String name);
+
+    @Query("""
+           SELECT DECK.DECKNAME from DECK
+           JOIN USERS on DECK.user_id = USERS.ID
+           WHERE USERS.ID = :id
+           """)
+    List<Deck> findDecksByUserId(long id);
 }
