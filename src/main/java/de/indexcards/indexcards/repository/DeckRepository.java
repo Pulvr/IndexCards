@@ -16,7 +16,7 @@ public interface DeckRepository extends ListCrudRepository<Deck, Long> {
     List<Deck> findDecksByUserName(String name);
 
     @Query("""
-           SELECT DECK.DECKNAME from DECK
+           SELECT DECK.USER_ID, DECK.DECKNAME from DECK
            JOIN USERS on DECK.user_id = USERS.ID
            WHERE USERS.ID = :id
            """)
