@@ -1,6 +1,7 @@
 package de.indexcards.indexcards;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -39,5 +40,5 @@ public class MainController {
     public String learning() {return "learning";}
 
     @GetMapping("/imprintandprivacy")
-    public String imprintandprivacy() {return "imprintandprivacy";}
+    public String imprintandprivacy() {return "imprintAndPrivacy";}
 }
