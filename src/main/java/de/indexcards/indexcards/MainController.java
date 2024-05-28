@@ -30,9 +30,6 @@ public class MainController {
     @GetMapping("/realdashboard")
     public String dashboard(Model model) {return "dashboard";}
 
-    @GetMapping("/collections")
-    public String collections() {return "collections";}
-
     @GetMapping("/howto")
     public String howto() {return "howto";}
 

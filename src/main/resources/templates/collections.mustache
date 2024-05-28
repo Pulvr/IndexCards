@@ -8,6 +8,12 @@
 <body>
 <h1>Your collections</h1>
 <h3>Select a collection to edit or to learn.</h3>
+
+<p>{{myUser.userName}}'s Decks</p>
+{{#myDecks}}
+    <p>{{name}}</p>
+{{/myDecks}}
+
 </body>
 
 {{>layout/footer}}

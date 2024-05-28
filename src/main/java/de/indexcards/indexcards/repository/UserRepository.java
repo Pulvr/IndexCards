@@ -12,6 +12,9 @@ public interface UserRepository extends ListCrudRepository<Users, Long> {
     @Query("SELECT * FROM Users WHERE USERNAME = :name")
     List<Users> findByName(String name);
 
+    @Query("SELECT * FROM USERS WHERE ID = :id")
+    Users findByUserId(long id);
+
     @Modifying
     @Query("UPDATE USERS SET USERNAME = :name WHERE ID = :id")
     boolean updateName(long id, String name);

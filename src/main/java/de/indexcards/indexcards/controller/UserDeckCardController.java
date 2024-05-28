@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Controller
-public class UserToDeckController {
+public class UserDeckCardController {
     private final UserRepository userRepository;
     private final DeckRepository deckRepository;
     private final CardRepository cardRepository;
 
-    public UserToDeckController(UserRepository userRepository,
-                                DeckRepository deckRepository,
-                                CardRepository cardRepository) {
+    public UserDeckCardController(UserRepository userRepository,
+                                  DeckRepository deckRepository,
+                                  CardRepository cardRepository) {
         this.userRepository = userRepository;
         this.deckRepository = deckRepository;
         this.cardRepository = cardRepository;
@@ -43,5 +43,8 @@ public class UserToDeckController {
         model.addAttribute("cardsOfUser", cardsOfUser);
         return "myUsers";
     }
+
+
+
 
 }

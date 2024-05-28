@@ -29,8 +29,8 @@ CREATE TABLE IF NOT EXISTS CARDS(
 INSERT INTO USERS(USERNAME, FIRSTNAME,LASTNAME,EMAIL,PASSWORD)
 VALUES  ('elondestroyer','Elon', 'Mah', 'something@bla', 'password123'),
         ('LisanAlGaib','Paul', 'Atreides', 'spice@stuff.com', 'brummsibumm'),
-        ('elondestroyer','Elon', 'Mah', 'something@bla', 'password123'),
-        ('Amelia','Vicar', 'Amelia', 'GoatDeer@Yharnham.com', 'screaming');
+        ('Amelia','Vicar', 'Amelia', 'GoatDeer@Yharnham.com', 'screaming'),
+        ('john','fu', 'fara', 'john@doe.com', 'mypw');
 
 
 INSERT INTO DECK(NAME, USER_ID)
