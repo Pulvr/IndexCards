@@ -3,11 +3,16 @@
 <head>
     <title>Log in</title>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./header.css">
+
 </head>
 <body>
 
-{{>layout/header}}
+<header>
+    {{>layout/header}}
+</header>
 
+<main>
 <form action="./dashboard" method="get">
     <h1>Log in to your account</h1>
     <h5>* required</h5>
@@ -24,8 +29,12 @@
     <br>
     <button type="submit">Log me in!</button>
 </form>
-</body>
+</main>
 
+<footer>
 {{>layout/footer}}
+</footer>
+
+</body>
 
 </html>

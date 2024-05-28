@@ -4,32 +4,29 @@
     <title>My Dashboard</title>
     <script src="http://localhost:35729/livereload.js" async></script>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./header.css">
+
 </head>
 <body>
-<header>
-    <div class="top-bar">
-        <form id="logo" action="./">
-            <button type="submit" style="background-color: transparent; border: 0px" >
-            <img src="./logo.png" alt="logo" height="48" width="130"/>
-            </button>
-        </form>
 
-        <div>
-            <a href="./">Homepage</a>
-        </div>
-    </div>
+<header>
+   {{>layout/header}}
 </header>
+
+<main>
     <h1>My Index Cards</h1>
     <form action="./collections"><button type="submit">My Collections</button></form>
     <h1>Continue last set</h1>
     <form action="./learning"><button type="submit">Continue last collection</button></form>
     <h1>How to (FAQ)</h1>
     <form action="./howto"><button type="submit">How to create index cards</button></form>
-<footer>
+</main>
 
+<footer>
+{{>layout/footer}}
 </footer>
+
 </body>
 
-{{>layout/footer}}
 
 </html>

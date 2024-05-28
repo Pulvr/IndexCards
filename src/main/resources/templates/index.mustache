@@ -4,11 +4,14 @@
         <title>IndexCards</title>
         <script src="http://localhost:35729/livereload.js" async></script>
         <link rel="stylesheet" href="./styles.css">
+        <link rel="stylesheet" href="./header.css">
     </head>
 
     <body>
 
+    <header>
     {{>layout/header}}
+    </header>
 
     <main>
         <h1>Index Cards</h1>
@@ -21,8 +24,12 @@
         <form action="./myUsers" ><button type="submit">Dashboard</button></form>
         <form action="./howto"><button type="submit">How to</button></form>
     </main>
+
+    <footer>
+    {{>layout/footer}}
+    </footer>
+
     </body>
 
-    {{>layout/footer}}
 
 </html>
