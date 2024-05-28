@@ -16,16 +16,20 @@
 {{/myUsers}}
 
 {{#allDecks}}
-    <p>Decks vom User mit ID {{userId}} {{deckName}}</p>
+    <p>Decks vom User mit ID {{userId}} {{name}}</p>
 {{/allDecks}}
 
 {{#firstUserID}}
-    <p>Decks vom User mit ID {{userId}} {{deckName}}</p>
+    <p>Decks vom User mit ID {{userId}} {{name}}</p>
 {{/firstUserID}}
 
 {{#allCards}}
     <p>Alle Karten {{id}} {{front}} {{back}}</p>
 {{/allCards}}
+
+{{#cardsOfUser}}
+    <p>Alle Karten vom User 1 {{deck_id}}  {{front}} {{back}}</p>
+{{/cardsOfUser}}
 
 </body>
 

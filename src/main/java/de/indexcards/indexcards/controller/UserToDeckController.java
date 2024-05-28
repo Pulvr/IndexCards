@@ -33,13 +33,14 @@ public class UserToDeckController {
         List<Deck> allDecks = deckRepository.findAll();
         List<Card> allCards = cardRepository.findAll();
         List<Deck> decksFirstUser = deckRepository.findDecksByUserId(myUsers.getFirst().getId());
-        //var firstUserID = decksFirstUser.getFirst().getUserId();
+
+        List<Card> cardsOfUser = cardRepository.findAllCardsByUserId(myUsers.getFirst().getId());
 
         model.addAttribute("myUsers", myUsers);
         model.addAttribute("allDecks", allDecks);
-        //model.addAttribute("usersDecks", allDecks);
         model.addAttribute("firstUserID", decksFirstUser);
         model.addAttribute("allCards", allCards);
+        model.addAttribute("cardsOfUser", cardsOfUser);
         return "myUsers";
     }
 

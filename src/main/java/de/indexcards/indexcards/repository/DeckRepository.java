@@ -9,14 +9,14 @@ import java.util.List;
 public interface DeckRepository extends ListCrudRepository<Deck, Long> {
 
     @Query("""
-           SELECT DECK.DECKNAME from DECK
+           SELECT DECK.NAME from DECK
            JOIN USERS on DECK.user_id = USERS.ID
            WHERE lower(USERS.USERNAME) = lower(:name)
            """)
     List<Deck> findDecksByUserName(String name);
 
     @Query("""
-           SELECT DECK.USER_ID, DECK.DECKNAME from DECK
+           SELECT DECK.USER_ID, DECK.NAME from DECK
            JOIN USERS on DECK.user_id = USERS.ID
            WHERE USERS.ID = :id
            """)

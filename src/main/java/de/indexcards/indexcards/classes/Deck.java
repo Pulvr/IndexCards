@@ -10,15 +10,15 @@ public class Deck {
 
     @Id
     private long id;
-    @Column("DECKNAME")
-    private String deckName;
+    @Column("NAME")
+    private String name;
 
     private long userId;
 
     public Deck(){}
 
-    public Deck(String deckName) {
-        this.deckName = deckName;
+    public Deck(String name) {
+        this.name = name;
     }
 
     public long getId() {
