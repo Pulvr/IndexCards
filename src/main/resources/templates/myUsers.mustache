@@ -3,10 +3,16 @@
 <head>
     <title>User Demo</title>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./header.css">
+
 </head>
 
 <body>
+<header>
+    {{>layout/header}}
+</header>
 
+<main>
 <!-- Test File to show Users with Decks-->
 <h1>User Demo</h1>
 
@@ -26,13 +32,16 @@
 {{#allCards}}
     <p>Alle Karten {{id}} {{front}} {{back}}</p>
 {{/allCards}}
+</main>
+
+<footer>
+{{>layout/footer}}
+</footer>
 
 {{#cardsOfUser}}
     <p>Alle Karten vom User 1 {{deck_id}}  {{front}} {{back}}</p>
 {{/cardsOfUser}}
 
 </body>
-
-{{>layout/footer}}
 
 </html>

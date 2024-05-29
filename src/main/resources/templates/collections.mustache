@@ -4,11 +4,16 @@
     <title>My Collections</title>
     <script src="http://localhost:35729/livereload.js" async></script>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./header.css">
+
 </head>
 <body>
 
-{{>layout/header}}
+<header>
+    {{>layout/header}}
+</header>
 
+<main>
 <h1>Your collections</h1>
 <h3>Select a collection to edit or to learn.</h3>
 
@@ -17,8 +22,13 @@
     <p>{{name}}</p>
 {{/myDecks}}
 
+
+</main>
+
+<footer>
+{{>layout/footer}}
+</footer>
 </body>
 
-{{>layout/footer}}
 
 </html>
