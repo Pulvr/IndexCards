@@ -18,4 +18,8 @@ public interface UserRepository extends ListCrudRepository<Users, Long> {
     @Modifying
     @Query("UPDATE USERS SET USERNAME = :name WHERE ID = :id")
     boolean updateName(long id, String name);
+
+    @Modifying
+    @Query("UPDATE USERS SET CURRENTDECK = :currDeck WHERE ID = :id")
+    boolean updateCurrDeck(long id, int currDeck);
 }

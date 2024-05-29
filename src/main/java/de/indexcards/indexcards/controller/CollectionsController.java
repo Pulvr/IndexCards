@@ -7,6 +7,8 @@ import de.indexcards.indexcards.repository.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,14 +24,30 @@ public class CollectionsController {
         this.deckRepository = deckRepository;
     }
 
+    Users myUser;
+    List<Deck> myDecks;
+
     @GetMapping("/collections")
     public String index(Model model) {
 
         //Nur einen User zurückgeben, aktuell immer den mit ID 1 als Default Test User
-        Users myUser = userRepository.findByUserId(1);
-        List<Deck> myDecks = deckRepository.findDecksByUserId(myUser.getId());
+        myUser = userRepository.findByUserId(1);
+        myDecks = deckRepository.findDecksByUserId(myUser.getId());
         model.addAttribute("myUser", myUser);
         model.addAttribute("myDecks", myDecks);
+
+        return "collections";
+    }
+
+    @PostMapping("/activateDeck")
+    public String activateDeck(@RequestParam("deckId") int deckId, Model model) {
+        myUser = userRepository.findByUserId(1);
+        myDecks = deckRepository.findDecksByUserId(myUser.getId());
+        model.addAttribute("myUser", myUser);
+        model.addAttribute("myDecks", myDecks);
+
+        userRepository.updateCurrDeck(myUser.getId(), deckId);
+
 
         return "collections";
     }

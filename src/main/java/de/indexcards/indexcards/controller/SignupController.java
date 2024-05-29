@@ -7,6 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * TODO
+ * Check for passwordrep, check that users can't be created endlessly
+ */
+
 @Controller
 public class SignupController {
 

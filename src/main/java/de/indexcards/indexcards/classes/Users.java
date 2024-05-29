@@ -22,6 +22,11 @@ public class Users {
     private String email;
 
     private String password;
+
+    //Soll das aktuell gewählte Deck liefern als Hilfsvariable
+    //erstmal auf 1 gesetzt, damit es mit den IDs der Decks übereinstimmt
+    private int currentDeck=1;
+
     public Users(){
 
     }
