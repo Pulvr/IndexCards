@@ -29,27 +29,23 @@ public class CollectionsController {
 
     @GetMapping("/collections")
     public String index(Model model) {
-
-        //Nur einen User zurückgeben, aktuell immer den mit ID 1 als Default Test User
+        //aktuell wird immer der User mit der ID 1 ausgegeben für Testzwecke
         myUser = userRepository.findByUserId(1);
         myDecks = deckRepository.findDecksByUserId(myUser.getId());
         model.addAttribute("myUser", myUser);
         model.addAttribute("myDecks", myDecks);
-
         return "collections";
     }
 
     @PostMapping("/activateDeck")
     public String activateDeck(@RequestParam("deckId") int deckId, Model model) {
-        myUser = userRepository.findByUserId(1);
-        myDecks = deckRepository.findDecksByUserId(myUser.getId());
-        model.addAttribute("myUser", myUser);
-        model.addAttribute("myDecks", myDecks);
-
         userRepository.updateCurrDeck(myUser.getId(), deckId);
-
-
-        return "collections";
+        return "learning";
     }
 
+    @PostMapping("/editDeck")
+    public String editDeck(@RequestParam("deckIdEdit") int deckId, Model model) {
+        userRepository.updateCurrDeck(myUser.getId(), deckId);
+        return "editor";
+    }
 }

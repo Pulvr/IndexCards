@@ -24,7 +24,9 @@
 {{#myDecks}}
     <form action="/activateDeck" method="post">
         <button type="submit" name="deckId" value={{id}}>{{name}}</button>
-        <button type="submit" name="deckIdEdit" >Edit Deck</button>
+    </form>
+    <form action="/editDeck" method="post">
+        <button type="submit" name="deckIdEdit" value={{id}}>Edit Deck</button>
     </form>
 {{/myDecks}}
 
