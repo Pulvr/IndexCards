@@ -37,15 +37,26 @@ public class CollectionsController {
         return "collections";
     }
 
-    @PostMapping("/activateDeck")
+    @PostMapping("/learning")
     public String activateDeck(@RequestParam("deckId") int deckId, Model model) {
         userRepository.updateCurrDeck(myUser.getId(), deckId);
         return "learning";
     }
 
-    @PostMapping("/editDeck")
+    @GetMapping("/learning")
+    public String learning() {
+        return "learning";
+    }
+
+    @PostMapping("/editor")
     public String editDeck(@RequestParam("deckIdEdit") int deckId, Model model) {
         userRepository.updateCurrDeck(myUser.getId(), deckId);
         return "editor";
     }
+
+    @GetMapping("/editor")
+    public String editor() {
+        return "editor";
+    }
+
 }

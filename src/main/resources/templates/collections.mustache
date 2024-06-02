@@ -22,10 +22,10 @@
 <p>{{myUser.userName}}'s Decks</p>
 
 {{#myDecks}}
-    <form action="/activateDeck" method="post">
+    <form action="/learning" method="post">
         <button type="submit" name="deckId" value={{id}}>{{name}}</button>
     </form>
-    <form action="/editDeck" method="post">
+    <form action="/editor" method="post">
         <button type="submit" name="deckIdEdit" value={{id}}>Edit Deck</button>
     </form>
 {{/myDecks}}

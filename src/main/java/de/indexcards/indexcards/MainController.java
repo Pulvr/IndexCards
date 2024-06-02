@@ -33,9 +33,6 @@ public class MainController {
     @GetMapping("/howto")
     public String howto() {return "howto";}
 
-    @GetMapping("/learning")
-    public String learning() {return "learning";}
-
     @GetMapping("/imprintandprivacy")
     public String imprintandprivacy() {return "imprintAndPrivacy";}
 }
