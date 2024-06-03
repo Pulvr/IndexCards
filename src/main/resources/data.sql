@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS USERS
     LASTNAME    VARCHAR(100) NOT NULL,
     EMAIL       VARCHAR(100) NOT NULL UNIQUE ,
     PASSWORD    VARCHAR(100) NOT NULL,
-    CURRENTDECK INTEGER
+    CURRENTDECK INTEGER DEFAULT 0
 );
 DROP TABLE IF EXISTS DECK;
 CREATE TABLE IF NOT EXISTS DECK
@@ -35,7 +35,7 @@ VALUES  ('elondestroyer','Elon', 'Mah', 'something@bla', 'password123'),
 
 
 INSERT INTO DECK(NAME, USER_ID)
-VALUES ( 'Japanese' , 1 ),( 'English' , 1 ),('fremen',2),('screaming',3),('testing',4);
+VALUES ( 'Japanese' , 1 ),( 'English' , 1 ),('fremen',1),('screaming',2),('testing',3),('testingSomeMOre',4);
 
 INSERT INTO CARDS(FRONT, BACK, DECK_ID)
 VALUES ( 'Konnichiwa','Hallo', 1 ),( 'fara','fu', 1 ),('Hello','Hallo',2),('I dare you' , 'lol ' , 3)

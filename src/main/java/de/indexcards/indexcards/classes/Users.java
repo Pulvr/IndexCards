@@ -23,9 +23,8 @@ public class Users {
 
     private String password;
 
-    //Soll das aktuell gewählte Deck liefern als Hilfsvariable
-    //erstmal auf 1 gesetzt, damit es mit den IDs der Decks übereinstimmt
-    private int currentDeck=1;
+    //Soll das aktuell gewählte Deck liefern
+    private int currentDeck;
 
     public Users(){
 
@@ -45,6 +44,9 @@ public class Users {
 
     public long getId() {
         return id;
+    }
+    public int getCurrentDeck() {
+        return currentDeck;
     }
 
 }

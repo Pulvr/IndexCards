@@ -15,10 +15,22 @@ public interface DeckRepository extends ListCrudRepository<Deck, Long> {
            """)
     List<Deck> findDecksByUserName(String name);
 
+    //Find all Decks of a User by a single User ID
     @Query("""
            SELECT DECK.ID, DECK.NAME, DECK.USER_ID from DECK
            JOIN USERS on DECK.user_id = USERS.ID
            WHERE USERS.ID = :id
            """)
     List<Deck> findDecksByUserId(long id);
+/*
+    //Find entire Deck just by the currentDeck ID and return Deck Object
+    @Query("""
+           SELECT DECK.ID, DECK.NAME, DECK.USER_ID from DECK
+           JOIN USERS on DECK.user_id = USERS.ID
+           WHERE USERS.CURRENTDECK = :currentDeckId
+           """)
+    Deck findCurrentDeckById(long currentDeckId);*/
+
+    @Query("SELECT USERS.CURRENTDECK FROM USERS WHERE USERS.ID = :id")
+    int findCurrentDeckId(long id);
 }
