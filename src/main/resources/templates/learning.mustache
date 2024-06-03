@@ -14,8 +14,14 @@
 
 <main>
     <h1>Learning mode</h1>
-    <p>{{chosenDeck.name}}</p>
-    <form action="./learning" ><button type="submit">Begin</button></form>
+    {{#emptyDeck}}
+        <b>{{.}}</b>
+    {{/emptyDeck}}
+    {{#chosenDeck}}
+        {{name}}
+        <form action="./learning" ><button type="submit">Begin</button></form>
+    {{/chosenDeck}}
+    <br>
 </main>
 
 <footer>

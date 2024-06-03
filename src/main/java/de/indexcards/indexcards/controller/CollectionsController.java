@@ -54,17 +54,14 @@ public class CollectionsController {
     @GetMapping("/learning")
     public String learning(Model model) {
        setUserAndDeck();
-        //funktioniert einigermaßen, nur muss ich noch prüfen, wie man in mustache sagt
-        //bitte nur ausgeben, wenn container nicht leer.
-        if (deckRepository.findCurrentDeckId(myUser.getId())==0) {
-            model.addAttribute("chosenDeck", "Kein Deck ausgewählt");
-            return "learning";
-        }else {
+        //Wenn Current ID = 0 ist (default wert) dann hat der User kein Deck ausgewählt, also Kein Deck ausgeben.
+        if (deckRepository.findCurrentDeckId(myUser.getId()) == 0) {
+            model.addAttribute("emptyDeck", "Kein Deck ausgewählt");
+        }else{
             myCurrentDeck = myDecks.get(deckRepository.findCurrentDeckId(myUser.getId()) - 1);
             model.addAttribute("chosenDeck", myCurrentDeck);
-            return "learning";
         }
-        //return "learning";
+            return "learning";
     }
 
     @PostMapping("/editor")
