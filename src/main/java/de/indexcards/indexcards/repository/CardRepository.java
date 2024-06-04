@@ -14,4 +14,11 @@ public interface CardRepository extends ListCrudRepository<Card,Long> {
             on CARDS.DECK_ID = DECK.ID WHERE USERS.ID = :id
             """)
     List<Card> findAllCardsByUserId(@Param("id") Long id);
+
+    @Query("""
+            Select CARDS.DECK_ID, CARDS.ID, CARDS.Front, CARDS.BACK FROM 
+            USERS join DECK on DECK.USER_ID = USERS.ID JOIN CARDS on CARDS.DECK_ID = DECK.ID 
+            WHERE USERS.ID = :id AND CARDS.DECK_ID = :deck_Id
+            """)
+    List<Card> findAllCardsByUserAndDeckId(@Param("id") Long id, @Param("deck_Id") Long deck_Id);
 }

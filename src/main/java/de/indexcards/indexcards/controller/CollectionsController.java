@@ -1,5 +1,6 @@
 package de.indexcards.indexcards.controller;
 
+import de.indexcards.indexcards.classes.Card;
 import de.indexcards.indexcards.classes.Deck;
 import de.indexcards.indexcards.classes.Users;
 import de.indexcards.indexcards.repository.CardRepository;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class CollectionsController {
@@ -30,6 +30,7 @@ public class CollectionsController {
     Users myUser;
     List<Deck> myDecks;
     Deck myCurrentDeck;
+    List<Card> cardsOfUser;
 
     @GetMapping("/collections")
     public String index(Model model) {
@@ -40,26 +41,32 @@ public class CollectionsController {
     }
 
     @PostMapping("/learning")
-    public String activateDeck(@RequestParam("deckId") int deckId, Model model) {
+    public String postActivateDeck(@RequestParam("deckId") int deckId, Model model) {
         setUserAndDeck();
 
         userRepository.updateCurrDeck(myUser.getId(), deckId);
-        myCurrentDeck = myDecks.get(deckId-1); //-1 wegen off by one in der Liste.
 
+        myCurrentDeck = myDecks.get(deckId-1); //-1 wegen off by one in der Liste.
+        cardsOfUser = cardRepository.findAllCardsByUserAndDeckId(myUser.getId(),myCurrentDeck.getId());
         model.addAttribute("chosenDeck", myCurrentDeck);
+        model.addAttribute("cardsOfUser", cardsOfUser);
 
         return "learning";
     }
 
     @GetMapping("/learning")
-    public String learning(Model model) {
+    public String getActivateDeck(Model model) {
        setUserAndDeck();
         //Wenn Current ID = 0 ist (default wert) dann hat der User kein Deck ausgewählt, also Kein Deck ausgeben.
         if (deckRepository.findCurrentDeckId(myUser.getId()) == 0) {
             model.addAttribute("emptyDeck", "Kein Deck ausgewählt");
         }else{
+
             myCurrentDeck = myDecks.get(deckRepository.findCurrentDeckId(myUser.getId()) - 1);
+            cardsOfUser = cardRepository.findAllCardsByUserAndDeckId(myUser.getId(),myCurrentDeck.getId());
             model.addAttribute("chosenDeck", myCurrentDeck);
+            model.addAttribute("cardsOfUser", cardsOfUser);
+
         }
             return "learning";
     }

@@ -35,7 +35,7 @@ VALUES  ('elondestroyer','Elon', 'Mah', 'something@bla', 'password123'),
 
 
 INSERT INTO DECK(NAME, USER_ID)
-VALUES ( 'Japanese' , 1 ),( 'English' , 1 ),('fremen',1),('screaming',2),('testing',3),('testingSomeMOre',4);
+VALUES ( 'Japanese' , 1 ),( 'English' , 1 ),('Fremen',1),('screaming',2),('testing',3),('testingSomeMOre',4);
 
 INSERT INTO CARDS(FRONT, BACK, DECK_ID)
 VALUES ( 'Konnichiwa','Hallo', 1 ),( 'fara','fu', 1 ),('Hello','Hallo',2),('I dare you' , 'lol ' , 3)

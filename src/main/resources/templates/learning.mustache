@@ -13,17 +13,26 @@
 </header>
 
 <main>
-    <h1>Learning mode</h1>
+    <h1>Learning Mode</h1>
     {{#emptyDeck}}
         <b>{{.}}</b>
     {{/emptyDeck}}
     {{#chosenDeck}}
-        {{name}}
-        <form action="./learning" ><button type="submit">Begin</button></form>
+        <p>Ausgewähltes Deck : {{name}}</p>
+        <br>
+        {{#cardsOfUser}}
+            <p>{{front}}; {{back}}</p>
+            <form action="./continue" method="get"></form>
+            <button type="submit" name="backward"> Zurück </button>
+            <button type="submit" name="forward"> Weiter </button>
+
+        {{/cardsOfUser}}
     {{/chosenDeck}}
     <br>
+    <br>
+    <br>
+<form action="./collections"><button type="submit">Back to collections</button></form>
 </main>
-
 <footer>
 {{>layout/footer}}
 </footer>
