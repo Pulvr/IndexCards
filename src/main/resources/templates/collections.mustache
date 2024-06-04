@@ -18,15 +18,16 @@
 <h1>Your collections</h1>
 <h3>Select a collection to edit or to learn.</h3>
 
-<!-- Hier werden alle Decks des Users ausgegeben, bisher landet man immer auf der learning page-->
-<!-- Noch hearausfinden, wie man auf der korrekten Seite des Decks landet-->
 <p>{{myUser.userName}}'s Decks</p>
 
 {{#myDecks}}
-    <form action="/activateDeck" method="post">
+    <form action="./learning" method="post">
         <button type="submit" name="deckId" value={{id}}>{{name}}</button>
-        <button type="submit" name="deckIdEdit" >Edit Deck</button>
     </form>
+    <form action="./editor" method="post">
+        <button type="submit" name="deckIdEdit" value={{id}}>Edit Deck</button>
+    </form>
+    <br>
 {{/myDecks}}
 
 </main>
