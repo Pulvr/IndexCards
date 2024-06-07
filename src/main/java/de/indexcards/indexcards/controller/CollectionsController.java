@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.ListIterator;
 
 @Controller
 public class CollectionsController {
@@ -30,7 +31,9 @@ public class CollectionsController {
     Users myUser;
     List<Deck> myDecks;
     Deck myCurrentDeck;
+    Card myCurrentCard;
     List<Card> cardsOfUser;
+    ListIterator<Card> usersCardsIterator;
 
     @GetMapping("/collections")
     public String index(Model model) {
@@ -48,8 +51,14 @@ public class CollectionsController {
 
         myCurrentDeck = myDecks.get(deckId-1); //-1 wegen off by one in der Liste.
         cardsOfUser = cardRepository.findAllCardsByUserAndDeckId(myUser.getId(),myCurrentDeck.getId());
+        //Die erste Karte aus dem Dech holen und darstellen
+        //Idee ist jetzt, mit der Continue funktion immer eine random Karte oder erstmal die nächste aussem Deck zu holen
+        myCurrentCard = cardsOfUser.getFirst();
+        //Iterator befüllen, damit er nicht in der continue action immer wieder neu befüllt wird.
+        usersCardsIterator = cardsOfUser.listIterator();
+
         model.addAttribute("chosenDeck", myCurrentDeck);
-        model.addAttribute("cardsOfUser", cardsOfUser);
+        model.addAttribute("cardsOfUser", myCurrentCard);
 
         return "learning";
     }
@@ -64,15 +73,44 @@ public class CollectionsController {
 
             myCurrentDeck = myDecks.get(deckRepository.findCurrentDeckId(myUser.getId()) - 1);
             cardsOfUser = cardRepository.findAllCardsByUserAndDeckId(myUser.getId(),myCurrentDeck.getId());
+            myCurrentCard = cardsOfUser.getFirst();
+            usersCardsIterator = cardsOfUser.listIterator();
+
             model.addAttribute("chosenDeck", myCurrentDeck);
-            model.addAttribute("cardsOfUser", cardsOfUser);
+            model.addAttribute("cardsOfUser", myCurrentCard);
 
         }
             return "learning";
     }
 
+    @PostMapping("/continue")
+    public String nextCard( Model model) {
+
+        if (usersCardsIterator.hasNext()) {
+            myCurrentCard = usersCardsIterator.next();
+        }
+
+        model.addAttribute("chosenDeck", myCurrentDeck);
+        model.addAttribute("cardsOfUser",myCurrentCard);
+
+        return "learning";
+    }
+
+    @PostMapping("/back")
+    public String prevCard( Model model) {
+
+        if (usersCardsIterator.hasPrevious()) {
+            myCurrentCard = usersCardsIterator.previous();
+        }
+
+        model.addAttribute("chosenDeck", myCurrentDeck);
+        model.addAttribute("cardsOfUser",myCurrentCard);
+
+        return "learning";
+    }
+
     @PostMapping("/editor")
-    public String editDeck(@RequestParam("deckIdEdit") int deckId, Model model) {
+    public String editDeck(@RequestParam("deckIdEdit") int deckId) {
         userRepository.updateCurrDeck(myUser.getId(), deckId);
         return "editor";
     }

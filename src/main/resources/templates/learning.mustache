@@ -22,10 +22,15 @@
         <p>Ausgewähltes Deck : {{name}}</p>
         <br>
         {{#cardsOfUser}}
+
             <p>{{front}}; {{back}}</p>
-            <form action="./continue" method="get"></form>
-            <button type="submit" name="backward"> Zurück </button>
-            <button type="submit" name="forward"> Weiter </button>
+            <form action="./continue" method="post">
+                <button type="submit" name="forward" > Weiter </button>
+            </form>
+            <form action="./back" method="post">
+                <button type="submit" name="back" > Zurück </button>
+            </form>
+
 
         {{/cardsOfUser}}
     {{/chosenDeck}}
