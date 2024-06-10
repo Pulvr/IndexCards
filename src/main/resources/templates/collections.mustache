@@ -18,6 +18,15 @@
 
 <p>{{myUser.userName}}'s Decks</p>
 
+    <form action="./addDeck" method="post">
+        <label>
+            <input type="text" name="newDeck" placeholder="Name for a new Deck">
+            <input type="submit" value="Add new Deck">
+        </label>
+    </form>
+    <br>
+    <br>
+
 {{#myDecks}}
     <form action="./learning" method="post">
         <button type="submit" name="deckId" value={{id}}>{{name}}</button>

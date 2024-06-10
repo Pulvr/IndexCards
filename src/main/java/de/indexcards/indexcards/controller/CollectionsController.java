@@ -36,8 +36,17 @@ public class CollectionsController {
     ListIterator<Card> usersCardsIterator;
 
     @GetMapping("/collections")
-    public String index(Model model) {
+    public String getIndex(Model model) {
         setUserAndDeck();
+        model.addAttribute("myUser", myUser);
+        model.addAttribute("myDecks", myDecks);
+        return "collections";
+    }
+
+    @PostMapping("/addDeck")
+    public String addDeck(@RequestParam("newDeck") String newDeck, Model model) {
+        deckRepository.addDeck(newDeck, myUser.getId());
+        System.out.println("Deck wurde erstellt");
         model.addAttribute("myUser", myUser);
         model.addAttribute("myDecks", myDecks);
         return "collections";

@@ -1,8 +1,10 @@
 package de.indexcards.indexcards.repository;
 
 import de.indexcards.indexcards.classes.Deck;
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.ListCrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,4 +27,9 @@ public interface DeckRepository extends ListCrudRepository<Deck, Long> {
 
     @Query("SELECT USERS.CURRENTDECK FROM USERS WHERE USERS.ID = :id")
     int findCurrentDeckId(long id);
+
+    @Transactional
+    @Modifying
+    @Query("INSERT INTO DECK( NAME,USER_ID ) VALUES ( :name,:id )")
+    void addDeck(String name, long id);
 }
