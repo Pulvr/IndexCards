@@ -34,6 +34,7 @@ public class CollectionsController {
     Card myCurrentCard;
     List<Card> cardsOfUser;
     ListIterator<Card> usersCardsIterator;
+    boolean addDeckExecuted = false;
 
     @GetMapping("/collections")
     public String getIndex(Model model) {
@@ -45,8 +46,14 @@ public class CollectionsController {
 
     @PostMapping("/addDeck")
     public String addDeck(@RequestParam("newDeck") String newDeck, Model model) {
-        deckRepository.addDeck(newDeck, myUser.getId()); //noch fixen, das es nur einmal ausführbar ist.
-        System.out.println("Deck wurde erstellt");
+
+        if (!addDeckExecuted) {
+            deckRepository.addDeck(newDeck, myUser.getId());
+            System.out.println("Deck wurde erstellt");
+            myDecks = deckRepository.findDecksByUserId(myUser.getId());
+            addDeckExecuted = true;
+        }
+
         model.addAttribute("myUser", myUser);
         model.addAttribute("myDecks", myDecks);
         return "collections";
@@ -58,35 +65,53 @@ public class CollectionsController {
 
         userRepository.updateCurrDeck(myUser.getId(), deckId);
 
-        myCurrentDeck = myDecks.get(deckId-1); //-1 wegen off by one in der Liste.
+        for (Deck testDeck : myDecks) {
+            if (testDeck.getId() == deckId) {
+                myCurrentDeck = testDeck;
+            }
+        }
+
         cardsOfUser = cardRepository.findAllCardsByUserAndDeckId(myUser.getId(),myCurrentDeck.getId());
-        //Die erste Karte aus dem Dech holen und darstellen
-        //Idee ist jetzt, mit der Continue funktion immer eine random Karte oder erstmal die nächste aussem Deck zu holen
-        myCurrentCard = cardsOfUser.getFirst();
-        //Iterator befüllen, damit er nicht in der continue action immer wieder neu befüllt wird.
-        usersCardsIterator = cardsOfUser.listIterator();
-
-        model.addAttribute("chosenDeck", myCurrentDeck);
-        model.addAttribute("cardsOfUser", myCurrentCard);
-
+        //Die erste Karte aus dem Deck holen und darstellen
+        //Idee ist jetzt, mit der Continue funktion immer eine random Karte oder erstmal die nächste aus dem Deck zu holen
+        if (!cardsOfUser.isEmpty()){
+            myCurrentCard = cardsOfUser.getFirst();
+            //Iterator befüllen, damit er nicht in der continue action immer wieder neu befüllt wird.
+            usersCardsIterator = cardsOfUser.listIterator();
+            model.addAttribute("chosenDeck", myCurrentDeck);
+            model.addAttribute("cardsOfUser", myCurrentCard);
+        }else{
+            model.addAttribute("chosenDeck", myCurrentDeck);
+            model.addAttribute("cardsEmpty", "no cards in deck, add cards under \" edit Deck\" first");
+        }
         return "learning";
     }
 
     @GetMapping("/learning")
     public String getActivateDeck(Model model) {
        setUserAndDeck();
-        //Wenn Current ID = 0 ist (default wert) dann hat der User kein Deck ausgewählt, also Kein Deck ausgeben.
+        //Wenn Current ID = 0 ist (default wert) dann hat der User kein Deck ausgewählt, also kein Deck ausgeben.
         if (deckRepository.findCurrentDeckId(myUser.getId()) == 0) {
             model.addAttribute("emptyDeck", "Kein Deck ausgewählt");
         }else{
 
-            myCurrentDeck = myDecks.get(deckRepository.findCurrentDeckId(myUser.getId()) - 1);
-            cardsOfUser = cardRepository.findAllCardsByUserAndDeckId(myUser.getId(),myCurrentDeck.getId());
-            myCurrentCard = cardsOfUser.getFirst();
-            usersCardsIterator = cardsOfUser.listIterator();
+            for (Deck testDeck : myDecks) {
+                if (testDeck.getId() == deckRepository.findCurrentDeckId(myUser.getId())) {
+                    myCurrentDeck = testDeck;
+                }
+            }
 
-            model.addAttribute("chosenDeck", myCurrentDeck);
-            model.addAttribute("cardsOfUser", myCurrentCard);
+            cardsOfUser = cardRepository.findAllCardsByUserAndDeckId(myUser.getId(),myCurrentDeck.getId());
+            if (!cardsOfUser.isEmpty()){
+                myCurrentCard = cardsOfUser.getFirst();
+                usersCardsIterator = cardsOfUser.listIterator();
+                model.addAttribute("chosenDeck", myCurrentDeck);
+                model.addAttribute("cardsOfUser", myCurrentCard);
+            }else{
+                model.addAttribute("chosenDeck", myCurrentDeck);
+                model.addAttribute("cardsEmpty", "no cards in deck, add cards under \" edit Deck\" first");
+            }
+
 
         }
             return "learning";
@@ -133,6 +158,12 @@ public class CollectionsController {
         //aktuell wird immer der User mit der ID 1 ausgegeben für Testzwecke
         myUser = userRepository.findByUserId(1);
         myDecks = deckRepository.findDecksByUserId(myUser.getId());
+        // wenn ein Deck geaddet wurde, ist der Flag immer true. Diese Hilfsfunktion wird bei jedem anderen Mapping
+        // ausgeführt, sollte also dazu führen, dass das adden erneut möglich wird,
+        // sobald man die "addDeck" Funktion verlässt
+        if (addDeckExecuted){
+            addDeckExecuted =false;
+        }
     }
 
 }

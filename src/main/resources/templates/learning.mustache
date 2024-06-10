@@ -21,8 +21,10 @@
     {{#chosenDeck}}
         <p>Ausgewähltes Deck : {{name}}</p>
         <br>
-        {{#cardsOfUser}}
 
+        {{#cardsEmpty}}<p>{{.}}</p>{{/cardsEmpty}}
+
+        {{#cardsOfUser}}
             <p>{{front}}; {{back}}</p>
             <form action="./continue" method="post">
                 <button type="submit" name="forward" > Weiter </button>
