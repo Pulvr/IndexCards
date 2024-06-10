@@ -45,7 +45,7 @@ public class CollectionsController {
 
     @PostMapping("/addDeck")
     public String addDeck(@RequestParam("newDeck") String newDeck, Model model) {
-        deckRepository.addDeck(newDeck, myUser.getId());
+        deckRepository.addDeck(newDeck, myUser.getId()); //noch fixen, das es nur einmal ausführbar ist.
         System.out.println("Deck wurde erstellt");
         model.addAttribute("myUser", myUser);
         model.addAttribute("myDecks", myDecks);
