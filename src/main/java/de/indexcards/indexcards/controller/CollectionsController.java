@@ -56,7 +56,7 @@ public class CollectionsController {
 
         model.addAttribute("myUser", myUser);
         model.addAttribute("myDecks", myDecks);
-        return "collections";
+        return "addDeckSuccess";
     }
 
     @PostMapping("/learning")
@@ -65,25 +65,12 @@ public class CollectionsController {
 
         userRepository.updateCurrDeck(myUser.getId(), deckId);
 
-        for (Deck testDeck : myDecks) {
-            if (testDeck.getId() == deckId) {
-                myCurrentDeck = testDeck;
+        for (Deck deckCounter : myDecks) {
+            if (deckCounter.getId() == deckId) {
+                myCurrentDeck = deckCounter;
             }
         }
-
-        cardsOfUser = cardRepository.findAllCardsByUserAndDeckId(myUser.getId(),myCurrentDeck.getId());
-        //Die erste Karte aus dem Deck holen und darstellen
-        //Idee ist jetzt, mit der Continue funktion immer eine random Karte oder erstmal die nächste aus dem Deck zu holen
-        if (!cardsOfUser.isEmpty()){
-            myCurrentCard = cardsOfUser.getFirst();
-            //Iterator befüllen, damit er nicht in der continue action immer wieder neu befüllt wird.
-            usersCardsIterator = cardsOfUser.listIterator();
-            model.addAttribute("chosenDeck", myCurrentDeck);
-            model.addAttribute("cardsOfUser", myCurrentCard);
-        }else{
-            model.addAttribute("chosenDeck", myCurrentDeck);
-            model.addAttribute("cardsEmpty", "no cards in deck, add cards under \" edit Deck\" first");
-        }
+        setCardsOfUser(model);
         return "learning";
     }
 
@@ -94,27 +81,30 @@ public class CollectionsController {
         if (deckRepository.findCurrentDeckId(myUser.getId()) == 0) {
             model.addAttribute("emptyDeck", "Kein Deck ausgewählt");
         }else{
-
-            for (Deck testDeck : myDecks) {
-                if (testDeck.getId() == deckRepository.findCurrentDeckId(myUser.getId())) {
-                    myCurrentDeck = testDeck;
+            // Finde aktuelles Deck anhand der gegebenen Deck ID
+            for (Deck deckCounter : myDecks) {
+                if (deckCounter.getId() == deckRepository.findCurrentDeckId(myUser.getId())) {
+                    myCurrentDeck = deckCounter;
                 }
             }
 
-            cardsOfUser = cardRepository.findAllCardsByUserAndDeckId(myUser.getId(),myCurrentDeck.getId());
-            if (!cardsOfUser.isEmpty()){
-                myCurrentCard = cardsOfUser.getFirst();
-                usersCardsIterator = cardsOfUser.listIterator();
-                model.addAttribute("chosenDeck", myCurrentDeck);
-                model.addAttribute("cardsOfUser", myCurrentCard);
-            }else{
-                model.addAttribute("chosenDeck", myCurrentDeck);
-                model.addAttribute("cardsEmpty", "no cards in deck, add cards under \" edit Deck\" first");
-            }
-
+            setCardsOfUser(model);
 
         }
             return "learning";
+    }
+
+    private void setCardsOfUser(Model model) {
+        cardsOfUser = cardRepository.findAllCardsByUserAndDeckId(myUser.getId(),myCurrentDeck.getId());
+        if (!cardsOfUser.isEmpty()){
+            myCurrentCard = cardsOfUser.getFirst();
+            usersCardsIterator = cardsOfUser.listIterator();
+            model.addAttribute("chosenDeck", myCurrentDeck);
+            model.addAttribute("cardsOfUser", myCurrentCard);
+        }else{
+            model.addAttribute("chosenDeck", myCurrentDeck);
+            model.addAttribute("cardsEmpty", "no cards in deck, add cards under \" edit Deck\" first");
+        }
     }
 
     @PostMapping("/continue")
