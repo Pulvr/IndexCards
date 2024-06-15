@@ -15,9 +15,9 @@ public interface UserRepository extends ListCrudRepository<Users, Long> {
     @Query("SELECT * FROM USERS WHERE ID = :id")
     Users findByUserId(long id);
 
-    @Modifying
-    @Query("UPDATE USERS SET USERNAME = :name WHERE ID = :id")
-    boolean updateName(long id, String name);
+//    @Modifying
+//    @Query("UPDATE USERS SET USERNAME = :name WHERE ID = :id")
+//    boolean updateName(long id, String name);
 
     @Modifying
     @Query("UPDATE USERS SET CURRENTDECK = :currDeck WHERE ID = :id")

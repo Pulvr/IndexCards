@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.ListIterator;
 
 @Controller
 public class CollectionsController {
@@ -30,14 +31,32 @@ public class CollectionsController {
     Users myUser;
     List<Deck> myDecks;
     Deck myCurrentDeck;
+    Card myCurrentCard;
     List<Card> cardsOfUser;
+    ListIterator<Card> usersCardsIterator;
+    boolean addDeckExecuted = false;
 
     @GetMapping("/collections")
-    public String index(Model model) {
+    public String getIndex(Model model) {
         setUserAndDeck();
         model.addAttribute("myUser", myUser);
         model.addAttribute("myDecks", myDecks);
         return "collections";
+    }
+
+    @PostMapping("/addDeck")
+    public String addDeck(@RequestParam("newDeck") String newDeck, Model model) {
+
+        if (!addDeckExecuted) {
+            deckRepository.addDeck(newDeck, myUser.getId());
+            System.out.println("Deck wurde erstellt");
+            myDecks = deckRepository.findDecksByUserId(myUser.getId());
+            addDeckExecuted = true;
+        }
+
+        model.addAttribute("myUser", myUser);
+        model.addAttribute("myDecks", myDecks);
+        return "addDeckSuccess";
     }
 
     @PostMapping("/learning")
@@ -46,33 +65,76 @@ public class CollectionsController {
 
         userRepository.updateCurrDeck(myUser.getId(), deckId);
 
-        myCurrentDeck = myDecks.get(deckId-1); //-1 wegen off by one in der Liste.
-        cardsOfUser = cardRepository.findAllCardsByUserAndDeckId(myUser.getId(),myCurrentDeck.getId());
-        model.addAttribute("chosenDeck", myCurrentDeck);
-        model.addAttribute("cardsOfUser", cardsOfUser);
-
+        for (Deck deckCounter : myDecks) {
+            if (deckCounter.getId() == deckId) {
+                myCurrentDeck = deckCounter;
+            }
+        }
+        setCardsOfUser(model);
         return "learning";
     }
 
     @GetMapping("/learning")
     public String getActivateDeck(Model model) {
        setUserAndDeck();
-        //Wenn Current ID = 0 ist (default wert) dann hat der User kein Deck ausgewählt, also Kein Deck ausgeben.
+        //Wenn Current ID = 0 ist (default wert) dann hat der User kein Deck ausgewählt, also kein Deck ausgeben.
         if (deckRepository.findCurrentDeckId(myUser.getId()) == 0) {
             model.addAttribute("emptyDeck", "Kein Deck ausgewählt");
         }else{
+            // Finde aktuelles Deck anhand der gegebenen Deck ID
+            for (Deck deckCounter : myDecks) {
+                if (deckCounter.getId() == deckRepository.findCurrentDeckId(myUser.getId())) {
+                    myCurrentDeck = deckCounter;
+                }
+            }
 
-            myCurrentDeck = myDecks.get(deckRepository.findCurrentDeckId(myUser.getId()) - 1);
-            cardsOfUser = cardRepository.findAllCardsByUserAndDeckId(myUser.getId(),myCurrentDeck.getId());
-            model.addAttribute("chosenDeck", myCurrentDeck);
-            model.addAttribute("cardsOfUser", cardsOfUser);
+            setCardsOfUser(model);
 
         }
             return "learning";
     }
 
+    private void setCardsOfUser(Model model) {
+        cardsOfUser = cardRepository.findAllCardsByUserAndDeckId(myUser.getId(),myCurrentDeck.getId());
+        if (!cardsOfUser.isEmpty()){
+            myCurrentCard = cardsOfUser.getFirst();
+            usersCardsIterator = cardsOfUser.listIterator();
+            model.addAttribute("chosenDeck", myCurrentDeck);
+            model.addAttribute("cardsOfUser", myCurrentCard);
+        }else{
+            model.addAttribute("chosenDeck", myCurrentDeck);
+            model.addAttribute("cardsEmpty", "no cards in deck, add cards under \" edit Deck\" first");
+        }
+    }
+
+    @PostMapping("/continue")
+    public String nextCard( Model model) {
+
+        if (usersCardsIterator.hasNext()) {
+            myCurrentCard = usersCardsIterator.next();
+        }
+
+        model.addAttribute("chosenDeck", myCurrentDeck);
+        model.addAttribute("cardsOfUser",myCurrentCard);
+
+        return "learning";
+    }
+
+    @PostMapping("/back")
+    public String prevCard( Model model) {
+
+        if (usersCardsIterator.hasPrevious()) {
+            myCurrentCard = usersCardsIterator.previous();
+        }
+
+        model.addAttribute("chosenDeck", myCurrentDeck);
+        model.addAttribute("cardsOfUser",myCurrentCard);
+
+        return "learning";
+    }
+
     @PostMapping("/editor")
-    public String editDeck(@RequestParam("deckIdEdit") int deckId, Model model) {
+    public String editDeck(@RequestParam("deckIdEdit") int deckId) {
         userRepository.updateCurrDeck(myUser.getId(), deckId);
         return "editor";
     }
@@ -86,6 +148,12 @@ public class CollectionsController {
         //aktuell wird immer der User mit der ID 1 ausgegeben für Testzwecke
         myUser = userRepository.findByUserId(1);
         myDecks = deckRepository.findDecksByUserId(myUser.getId());
+        // wenn ein Deck geaddet wurde, ist der Flag immer true. Diese Hilfsfunktion wird bei jedem anderen Mapping
+        // ausgeführt, sollte also dazu führen, dass das adden erneut möglich wird,
+        // sobald man die "addDeck" Funktion verlässt
+        if (addDeckExecuted){
+            addDeckExecuted =false;
+        }
     }
 
 }
