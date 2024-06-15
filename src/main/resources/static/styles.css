@@ -12,15 +12,13 @@ body {
     background-color: var(--lightgray);
     color: var(--white);
     margin: 0;
-    overflow: scroll;
 }
 main {
     margin: 5px;
     padding: 5px;
-    height: 88vh;
-    border: none;
+    min-height: 100vh;
+    border: solid 3px transparent;
     border-radius: 10px;
-    vertical-align: center;
 }
 .dashbtn-container{
     display: flex;
@@ -40,12 +38,4 @@ main {
     padding: 70px;
     margin: 10px;
     box-sizing: border-box;
-}
-#myCollections{
-    display: flex;
-}
-
-#cardList{
-    overflow:scroll;
-    height: 12rem;
 }
