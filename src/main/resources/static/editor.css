@@ -23,7 +23,7 @@
 
 .fb-side {
     display: grid;
-    overflow: scroll;
+    overflow: hidden;
     border : solid 3px var(--darkgray);
     border-radius: 10px;
     margin: 3px;

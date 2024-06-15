@@ -134,8 +134,12 @@ public class CollectionsController {
     }
 
     @PostMapping("/editor")
-    public String editDeck(@RequestParam("deckIdEdit") int deckId) {
+    public String editDeck(@RequestParam("deckIdEdit") int deckId, Model model) {
         userRepository.updateCurrDeck(myUser.getId(), deckId);
+        setUserAndDeck();
+        model.addAttribute("cardsOfUser", cardsOfUser);
+        model.addAttribute("front", "placeholderFront");
+        model.addAttribute("back", "placeholderBack");
         return "editor";
     }
 
@@ -155,5 +159,7 @@ public class CollectionsController {
             addDeckExecuted =false;
         }
     }
+
+
 
 }
