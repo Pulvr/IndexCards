@@ -136,7 +136,13 @@ public class CollectionsController {
     @PostMapping("/editor")
     public String editDeck(@RequestParam("deckIdEdit") int deckId, Model model) {
         userRepository.updateCurrDeck(myUser.getId(), deckId);
-        setUserAndDeck();
+
+        for (Deck deckCounter : myDecks) {
+            if (deckCounter.getId() == deckId) {
+                myCurrentDeck = deckCounter;
+            }
+        }
+        setCardsOfUser(model);
         model.addAttribute("cardsOfUser", cardsOfUser);
         model.addAttribute("front", "placeholderFront");
         model.addAttribute("back", "placeholderBack");
