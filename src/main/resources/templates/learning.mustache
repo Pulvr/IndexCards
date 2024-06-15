@@ -30,7 +30,11 @@
         {{/cardsEmpty}}
 
         {{#cardsOfUser}}
-            <p>{{front}}</p>
+            <details>
+                <summary>{{front}}</summary>
+                {{back}}
+            </details>
+            <br>
             <form action="./continue" method="post">
                 <button type="submit" name="forward" > Weiter </button>
             </form>
