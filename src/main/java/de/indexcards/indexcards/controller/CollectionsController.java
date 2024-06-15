@@ -65,11 +65,7 @@ public class CollectionsController {
 
         userRepository.updateCurrDeck(myUser.getId(), deckId);
 
-        for (Deck deckCounter : myDecks) {
-            if (deckCounter.getId() == deckId) {
-                myCurrentDeck = deckCounter;
-            }
-        }
+        changeCurrentDeck(deckId);
         setCardsOfUser(model);
         return "learning";
     }
@@ -82,11 +78,7 @@ public class CollectionsController {
             model.addAttribute("emptyDeck", "Kein Deck ausgewählt");
         }else{
             // Finde aktuelles Deck anhand der gegebenen Deck ID
-            for (Deck deckCounter : myDecks) {
-                if (deckCounter.getId() == deckRepository.findCurrentDeckId(myUser.getId())) {
-                    myCurrentDeck = deckCounter;
-                }
-            }
+            changeCurrentDeck(deckRepository.findCurrentDeckId(myUser.getId()));
 
             setCardsOfUser(model);
 
@@ -137,11 +129,8 @@ public class CollectionsController {
     public String editDeck(@RequestParam("deckIdEdit") int deckId, Model model) {
         userRepository.updateCurrDeck(myUser.getId(), deckId);
 
-        for (Deck deckCounter : myDecks) {
-            if (deckCounter.getId() == deckId) {
-                myCurrentDeck = deckCounter;
-            }
-        }
+        changeCurrentDeck(deckId);
+
         setCardsOfUser(model);
         model.addAttribute("cardsOfUser", cardsOfUser);
         model.addAttribute("front", "placeholderFront");
@@ -166,6 +155,13 @@ public class CollectionsController {
         }
     }
 
+    private void changeCurrentDeck(int deckId){
+        for (Deck deckCounter : myDecks) {
+            if (deckCounter.getId() == deckId) {
+                myCurrentDeck = deckCounter;
+            }
+        }
+    }
 
 
 }
