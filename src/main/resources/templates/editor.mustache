@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>Index Card Editor</title>
+    <script src="http://localhost:35729/livereload.js" async></script>
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="./header.css">
 
@@ -13,7 +14,27 @@
 </header>
 
 <main>
-<h1></h1>
+    <h2>Editor</h2>
+    <h3>Add new index cards to your active collection, edit existing ones or delete cards you don't need anymore.</h3>
+    <br>
+    <h3>Select a card to edit:</h3>
+    <div id="cardList">
+        <div>Placeholder card 1</div>
+        <div>Placeholder card 2</div>
+        <div>Placeholder card 3</div>
+        <div>Placeholder card 4</div>
+        <div>Placeholder card 5</div>
+        <div>etc.</div>
+    </div>
+    <br>
+    <button>Create a new card</button>
+    <br>
+    <button>Add this card to [active deck]</button>
+    <br>
+    <br>
+    <form action="./collections"><button type="submit">Back to my collections</button></form>
+    <br>
+    <form action="./dashboard"><button type="submit">Back to dashboard</button></form>
 </main>
 
 <footer>
