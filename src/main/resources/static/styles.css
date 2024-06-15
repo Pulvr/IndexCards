@@ -42,8 +42,3 @@ main {
     color: var(--white);
 }
 .footer a:hover {color: var(--accent1);}
-
-#cardList{
-    overflow:scroll;
-    height: 12rem;
-}
