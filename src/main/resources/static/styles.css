@@ -17,7 +17,7 @@ main {
     margin: 5px;
     padding: 5px;
     min-height: 100vh;
-    border: solid 3px var(--darkgray);
+    border: solid 3px transparent;
     border-radius: 10px;
 }
 
