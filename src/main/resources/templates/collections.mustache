@@ -20,23 +20,25 @@
 
     <form action="./addDeck" method="post">
         <label>
-            <input type="text" name="newDeck" placeholder="Name for a new Deck">
-            <input type="submit" value="Add new Deck">
+            <input type="text" name="newDeck" placeholder="Name for a new deck">
+            <input type="submit" value="Add new deck">
         </label>
     </form>
     <br>
     <br>
 
 {{#myDecks}}
+    <div>{{name}}</div>
     <form action="./learning" method="post">
-        <button type="submit" name="deckId" value={{id}}>{{name}}</button>
+        <button type="submit" name="deckId" value={{id}}>Learn this deck</button>
     </form>
     <form action="./editor" method="post">
-        <button type="submit" name="deckIdEdit" value={{id}}>Edit Deck</button>
+        <button type="submit" name="deckIdEdit" value={{id}}>Edit deck</button>
     </form>
     <br>
 {{/myDecks}}
-
+    <br>
+    <form action="./dashboard"><button type="submit">Back to dashboard</button></form>
 </main>
 
 <footer>

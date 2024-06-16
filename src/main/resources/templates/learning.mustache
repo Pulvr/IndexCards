@@ -20,7 +20,7 @@
     {{#chosenDeck}}
         <p>Ausgewähltes Deck : {{name}}</p>
         <br>
-        <!-- Wenn Gewählts Deck keine Karten hat zum Editor verweisen -->
+        <!-- Wenn Gewähltes Deck keine Karten hat zum Editor verweisen -->
         {{#cardsEmpty}}
             <p>{{.}}</p>
 
@@ -46,7 +46,9 @@
     <br>
     <br>
     <br>
-<form action="./collections"><button type="submit">Back to Collections</button></form>
+    <form action="./collections"><button type="submit">Back to collections</button></form>
+    <br>
+    <form action="./dashboard"><button type="submit">Back to dashboard</button></form>
 </main>
 <footer>
 {{>layout/footer}}
