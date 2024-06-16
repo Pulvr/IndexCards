@@ -12,6 +12,7 @@ body {
     background-color: var(--lightgray);
     color: var(--white);
     margin: 0;
+    overflow: scroll;
 }
 main {
     margin: 5px;
@@ -19,6 +20,7 @@ main {
     min-height: 100vh;
     border: solid 3px transparent;
     border-radius: 10px;
+    vertical-align: center;
 }
 .dashbtn-container{
     display: flex;
@@ -39,3 +41,4 @@ main {
     margin: 10px;
     box-sizing: border-box;
 }
+
