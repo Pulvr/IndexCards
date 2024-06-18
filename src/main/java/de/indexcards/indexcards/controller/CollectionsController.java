@@ -177,17 +177,17 @@ public class CollectionsController {
         return "creationSuccessful";
     }
 
-//    @PostMapping("/creationSuccessful")
-//    public String addNewCard(@RequestParam("front") String front, @RequestParam("back") String back) {
-//        setUserAndDeck();
-//        cardRepository.addCard(myCurrentDeck.getId(), myUser.getId(), front, back);
-//        return "creationSuccessful";
-//    }
-
     @PostMapping("/creationSuccessful")
-    public String placeholderSuccess(){
+    public String addNewCard(@RequestParam("front") String front, @RequestParam("back") String back) {
+        setUserAndDeck();
+        cardRepository.addCard(myCurrentDeck.getId(), myUser.getId(), front, back);
         return "creationSuccessful";
     }
+
+//    @PostMapping("/creationSuccessful")
+//    public String placeholderSuccess(){
+//        return "creationSuccessful";
+//    }
 
     @GetMapping("/creationSuccessful")
     public String returnSuccess(){
