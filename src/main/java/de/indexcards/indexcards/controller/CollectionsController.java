@@ -62,9 +62,7 @@ public class CollectionsController {
     @PostMapping("/learning")
     public String postActivateDeck(@RequestParam("deckId") int deckId, Model model) {
         setUserAndDeck();
-
         userRepository.updateCurrDeck(myUser.getId(), deckId);
-
         changeCurrentDeck(deckId);
         setCardsOfUser(model);
         return "learning";
@@ -132,16 +130,18 @@ public class CollectionsController {
         changeCurrentDeck(deckId);
 
         setCardsOfUser(model);
+        model.addAttribute("deckIdEdit", deckId);
+        model.addAttribute("chosenDeck", myCurrentDeck);
         model.addAttribute("cardsOfUser", cardsOfUser);
         model.addAttribute("front", "placeholderFront");
         model.addAttribute("back", "placeholderBack");
         return "editor";
     }
 
-    @GetMapping("/editor")
-    public String editor() {
-        return "editor";
-    }
+//    @GetMapping("/editor")
+//    public String editor() {
+//        return "editor";
+//    }
 
     public void setUserAndDeck(){
         //aktuell wird immer der User mit der ID 1 ausgegeben für Testzwecke
@@ -163,5 +163,35 @@ public class CollectionsController {
         }
     }
 
+    @GetMapping("/create")
+    public String createNewCard(Model model) {
+        setUserAndDeck();
+        model.addAttribute("chosenDeck", myCurrentDeck);
+        return "create";
+    }
+
+    @PostMapping("/create")
+    public String createACard(@RequestParam("front") String front, @RequestParam("back") String back) {
+        setUserAndDeck();
+        cardRepository.addCard(myCurrentDeck.getId(), myUser.getId(), front, back);
+        return "creationSuccessful";
+    }
+
+//    @PostMapping("/creationSuccessful")
+//    public String addNewCard(@RequestParam("front") String front, @RequestParam("back") String back) {
+//        setUserAndDeck();
+//        cardRepository.addCard(myCurrentDeck.getId(), myUser.getId(), front, back);
+//        return "creationSuccessful";
+//    }
+
+    @PostMapping("/creationSuccessful")
+    public String placeholderSuccess(){
+        return "creationSuccessful";
+    }
+
+    @GetMapping("/creationSuccessful")
+    public String returnSuccess(){
+        return "creationSuccessful";
+    }
 
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Create a new card</title>
+    <!--script src="http://localhost:35729/livereload.js" async></script-->
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+<form action="./creationSuccessful" method="post">
+    <label>
+        Front side:
+        <input type="text" name="front" placeholder="Enter text here" required>
+        <br>
+        Back side:
+        <input type="text" name="back" placeholder="Enter text here" required>
+    </label>
+    <br>
+    <br>
+    <button type="submit">Add this card to {{chosenDeck.name}}</button>
+</form>
+
+<!--form action="./creationSuccessful" method="get">
+    <button type="submit">Testing button</button>
+</form-->
+
+</body>
+
+</html>
