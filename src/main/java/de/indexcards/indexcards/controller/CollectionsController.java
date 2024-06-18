@@ -6,6 +6,9 @@ import de.indexcards.indexcards.classes.Users;
 import de.indexcards.indexcards.repository.CardRepository;
 import de.indexcards.indexcards.repository.DeckRepository;
 import de.indexcards.indexcards.repository.UserRepository;
+import org.apache.juli.logging.Log;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.ListIterator;
 
+//@Component
 @Controller
 public class CollectionsController {
 
@@ -173,14 +177,14 @@ public class CollectionsController {
     @PostMapping("/create")
     public String createACard(@RequestParam("front") String front, @RequestParam("back") String back) {
         setUserAndDeck();
-        cardRepository.addCard(myCurrentDeck.getId(), myUser.getId(), front, back);
+        cardRepository.addCard(myCurrentDeck.getId(), front, back);
         return "creationSuccessful";
     }
 
     @PostMapping("/creationSuccessful")
     public String addNewCard(@RequestParam("front") String front, @RequestParam("back") String back) {
         setUserAndDeck();
-        cardRepository.addCard(myCurrentDeck.getId(), myUser.getId(), front, back);
+        cardRepository.addCard(myCurrentDeck.getId(), front, back);
         return "creationSuccessful";
     }
 
@@ -194,4 +198,9 @@ public class CollectionsController {
         return "creationSuccessful";
     }
 
+//    @EventListener(CardRepository.class)
+//    void refreshEditor(){
+//        //hier soll der Editor refresht werden
+//        System.out.println("refresh");
+//    }
 }

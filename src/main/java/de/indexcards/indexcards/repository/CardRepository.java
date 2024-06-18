@@ -1,11 +1,14 @@
 package de.indexcards.indexcards.repository;
 
 import de.indexcards.indexcards.classes.Card;
+import org.springframework.context.event.EventListener;
 import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 import java.util.List;
 
@@ -26,6 +29,6 @@ public interface CardRepository extends ListCrudRepository<Card,Long> {
 
     @Transactional
     @Modifying
-    @Query("INSERT INTO CARDS( DECK_ID, ID, Front, BACK ) VALUES ( :deck_id,:id, :front, :back )")
-    void addCard(long deck_id, long id, String front, String back);
+    @Query("INSERT INTO CARDS( DECK_ID, Front, BACK ) VALUES ( :deck_id, :front, :back )")
+    void addCard(long deck_id, String front, String back);
 }
