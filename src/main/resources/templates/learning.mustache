@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Learning Mode</title>
+    <title>Learning</title>
     <script src="http://localhost:35729/livereload.js" async></script>
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="./header.css">
@@ -18,7 +18,7 @@
     <!-- Wenn kein Deck ausgewählt, Fehlermeldung geben-->
     {{#emptyDeck}}<b>{{.}}</b>{{/emptyDeck}}
     {{#chosenDeck}}
-        <p>Ausgewähltes Deck : {{name}}</p>
+        <p>Selected deck: {{name}}</p>
         <br>
         <!-- Wenn Gewähltes Deck keine Karten hat zum Editor verweisen -->
         {{#cardsEmpty}}
@@ -36,10 +36,10 @@
             </details>
             <br>
             <form action="./continue" method="post">
-                <button type="submit" name="forward" > Weiter </button>
+                <button type="submit" name="forward" > Next </button>
             </form>
             <form action="./back" method="post">
-                <button type="submit" name="back" > Zurück </button>
+                <button type="submit" name="back" > Back </button>
             </form>
         {{/cardsOfUser}}
     {{/chosenDeck}}
