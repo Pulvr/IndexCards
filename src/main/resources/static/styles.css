@@ -11,7 +11,7 @@ body {
     font-family: "Helvetica", sans-serif;
     background-color: var(--lightgray);
     color: var(--white);
-    margin: 0;
+    margin: 0px;
     overflow: scroll;
 }
 main {
@@ -21,6 +21,7 @@ main {
     border: none;
     border-radius: 10px;
     vertical-align: center;
+    text-align: center;
 }
 .dashbtn-container{
     display: flex;
@@ -28,6 +29,7 @@ main {
     align-items: center;
     height: 80vh;
     vertical-align: center;
+    width: 100%;
 }
 .dash-button {
     display: block;
@@ -37,8 +39,19 @@ main {
     border: 2px solid transparent;
     border-radius: 10px;
     text-align: center;
-    padding: 70px;
     margin: 10px;
     box-sizing: border-box;
+    width: 15rem;
+    height: 10rem;
+    font-size: 1.2rem;
+}
+.dash-button:hover {
+    transform: scale(1.05);
+    border-color: var(--accent1);
+}
+
+.Deck {
+    align-self: center;
+
 }
 
