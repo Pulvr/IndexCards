@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./footer.css">
+    <link rel="stylesheet" href="editor.css">
 
 </head>
 <body>
@@ -30,25 +31,19 @@
         {{/cardsEmpty}}
 
         {{#cardsOfUser}}
-            <details>
+            <details class="card">
                 <summary>{{front}}</summary>
                 {{back}}
             </details>
             <br>
-            <form action="./continue" method="post">
+            <form action="./continue" method="post" class="Main-Button">
                 <button type="submit" name="forward" > Weiter </button>
             </form>
-            <form action="./back" method="post">
+            <form action="./back" method="post" class="Main-Button">
                 <button type="submit" name="back" > Zurück </button>
             </form>
         {{/cardsOfUser}}
     {{/chosenDeck}}
-    <br>
-    <br>
-    <br>
-    <form action="./collections"><button type="submit">Back to collections</button></form>
-    <br>
-    <form action="./dashboard"><button type="submit">Back to dashboard</button></form>
 </main>
 <footer>
 {{>layout/footer}}
