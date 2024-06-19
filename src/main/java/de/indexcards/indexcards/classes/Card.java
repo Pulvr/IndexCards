@@ -15,11 +15,11 @@ public class Card {
 
 
     @Column("DECK_ID")
-    private String deck_id;
+    private long deck_id;
 
     public Card() {}
 
-    Card(String front, String back, String deck_id) {
+    Card(String front, String back, long deck_id) {
         this.front = front;
         this.back = back;
         this.deck_id = deck_id;
@@ -29,7 +29,7 @@ public class Card {
         return id;
     }
 
-    public String getDeck_id() {
+    public long getDeck_id() {
         return deck_id;
     }
 

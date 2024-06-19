@@ -17,8 +17,8 @@ body {
 main {
     margin: 5px;
     padding: 5px;
-    height: 88vh;
-    border: none;
+    min-height: 100vh;
+    border: solid 3px transparent;
     border-radius: 10px;
     vertical-align: center;
     text-align: center;

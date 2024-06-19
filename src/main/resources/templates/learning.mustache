@@ -15,29 +15,40 @@
 
 <main>
     <h1>Learning Mode</h1>
-    {{#emptyDeck}}
-        <b>{{.}}</b>
-    {{/emptyDeck}}
+    <!-- Wenn kein Deck ausgewählt, Fehlermeldung geben-->
+    {{#emptyDeck}}<b>{{.}}</b>{{/emptyDeck}}
     {{#chosenDeck}}
         <p>Ausgewähltes Deck : {{name}}</p>
         <br>
-        {{#cardsOfUser}}
+        <!-- Wenn Gewähltes Deck keine Karten hat zum Editor verweisen -->
+        {{#cardsEmpty}}
+            <p>{{.}}</p>
 
-            <p>{{front}}; {{back}}</p>
+        <form action="./editor" method="post">
+            <button type="submit" name="deckIdEdit" value={{id}}>Edit Deck</button>
+        </form>
+        {{/cardsEmpty}}
+
+        {{#cardsOfUser}}
+            <details>
+                <summary>{{front}}</summary>
+                {{back}}
+            </details>
+            <br>
             <form action="./continue" method="post">
                 <button type="submit" name="forward" > Weiter </button>
             </form>
             <form action="./back" method="post">
                 <button type="submit" name="back" > Zurück </button>
             </form>
-
-
         {{/cardsOfUser}}
     {{/chosenDeck}}
     <br>
     <br>
     <br>
-<form action="./collections"><button type="submit">Back to collections</button></form>
+    <form action="./collections"><button type="submit">Back to collections</button></form>
+    <br>
+    <form action="./dashboard"><button type="submit">Back to dashboard</button></form>
 </main>
 <footer>
 {{>layout/footer}}
