@@ -132,3 +132,20 @@ main {
     transform: scale(1.05);
     border-color: var(--accent1);
 }
+#button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 15rem;
+    width: 15rem;
+    border-radius: 10px;
+    border: none;
+    margin: 3px;
+    background-color: var(--darkgray);
+}

@@ -31,23 +31,42 @@
         {{/cardsEmpty}}
 
         {{#cardsOfUser}}
-            <details class="card">
-                <summary>{{front}}</summary>
-                {{back}}
-            </details>
+            <div class="card">
+                <div class="front-container">
+                <h2 class="front">{{front}}</h2>
+                </div>
+                <div class="back-container" id="container" onclick="toggleText()">
+                <h2 class="back" id="toggleText">{{back}}</h2>
+                </div>
+            </div>
             <br>
-            <form action="./continue" method="post" class="Main-Button">
-                <button type="submit" name="forward" > Weiter </button>
-            </form>
+        <div id="button-container">
             <form action="./back" method="post" class="Main-Button">
                 <button type="submit" name="back" > Zurück </button>
             </form>
+            <form action="./continue" method="post" class="Main-Button">
+                <button type="submit" name="forward" > Weiter </button>
+            </form>
+        </div>
         {{/cardsOfUser}}
     {{/chosenDeck}}
 </main>
 <footer>
 {{>layout/footer}}
 </footer>
+<script>
+    function toggleText() {
+        var text = document.getElementById("toggleText");
+        var container = document.getElementById("container");
+        if (text.style.display === "none" || text.style.display === "") {
+            text.style.display = "block";
+            container.style.background = "var(--lightgray)"
+        } else {
+            text.style.display = "none";
+            container.style.background = "linear-gradient(to bottom right, var(--accent1), var(--accent2))"
+        }
+    }
+</script>
 
 </body>
 
