@@ -22,7 +22,7 @@
 
     <div class="scrolling-wrapper">
         {{#cardsOfUser}}
-        <div class="card">
+        <div class="card-editor">
             <div class="fb-side">{{front}}</div>
             <div class="fb-side">{{back}}</div>
             <div class="editbtns">
@@ -33,21 +33,15 @@
         {{/cardsOfUser}}
     </div>
 
-    <br>
-    <form action="./create" method="post">
+    <form action="./create" method="post" class="Main-Button">
         <button onclick="MyWindow=window.open('./create','cardCreation','width=600,height=300'); return false;">Create a new card
             <!--span class="popuptext" id="popupCreator">
                 Enter text for your new index card here:
             </span-->
         </button>
     </form>
-    <br>
+
     <!--button>Add this card to [active deck]</button-->
-    <br>
-    <br>
-    <form action="./collections"><button type="submit">Back to my collections</button></form>
-    <br>
-    <form action="./dashboard"><button type="submit">Back to dashboard</button></form>
 </main>
 
 <footer>
