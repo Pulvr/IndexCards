@@ -128,12 +128,11 @@ public class CollectionsController {
     }
 
     @PostMapping("/editor")
-    public String editDeck(@RequestParam("deckIdEdit") int deckId, Model model) {
+    public String editDeck(@RequestParam(name="cardId", required=false, defaultValue = "999") long cardId, @RequestParam(name="deckIdEdit", required=false, defaultValue = "999") int deckId, Model model) {
         userRepository.updateCurrDeck(myUser.getId(), deckId);
-
         changeCurrentDeck(deckId);
-
         setCardsOfUser(model);
+        cardRepository.deleteCard(cardId);
         model.addAttribute("deckIdEdit", deckId);
         model.addAttribute("chosenDeck", myCurrentDeck);
         model.addAttribute("cardsOfUser", cardsOfUser);
@@ -142,10 +141,10 @@ public class CollectionsController {
         return "editor";
     }
 
-//    @GetMapping("/editor")
-//    public String editor() {
-//        return "editor";
-//    }
+    @GetMapping("/editor")
+    public String editor() {
+        return "editor";
+    }
 
     public void setUserAndDeck(){
         //aktuell wird immer der User mit der ID 1 ausgegeben für Testzwecke

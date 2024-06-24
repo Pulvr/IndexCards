@@ -31,4 +31,9 @@ public interface CardRepository extends ListCrudRepository<Card,Long> {
     @Modifying
     @Query("INSERT INTO CARDS( DECK_ID, Front, BACK ) VALUES ( :deck_id, :front, :back )")
     void addCard(long deck_id, String front, String back);
+
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM CARDS WHERE CARDS.ID = :id ")
+    void deleteCard(long id);
 }

@@ -65,13 +65,13 @@
 
 .editbtns {
     display: inline-block;
-    height: 20%;
+    height: 40%;
     width: 100%;
 }
 
 .editbtns button{
-    height: 100%;
-    width: 46%;
+    height: 85%;
+    width: 80%;
     border-radius: 10px;
     border: none;
     margin: 3px;

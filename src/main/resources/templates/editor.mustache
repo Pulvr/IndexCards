@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="./footer.css">
     <link rel="stylesheet" href="./editor.css">
-
 </head>
 <body>
 
@@ -26,8 +25,9 @@
             <div class="fb-side">{{front}}</div>
             <div class="fb-side">{{back}}</div>
             <div class="editbtns">
-                <button>Edit</button>
-                <button>Delete</button>
+                <form action="./editor" method="post">
+                    <button type="submit" class="button" name="cardId" value="{{id}}">Delete</button>
+                </form>
             </div>
         </div>
         {{/cardsOfUser}}
