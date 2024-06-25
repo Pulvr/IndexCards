@@ -6,9 +6,6 @@ import de.indexcards.indexcards.classes.Users;
 import de.indexcards.indexcards.repository.CardRepository;
 import de.indexcards.indexcards.repository.DeckRepository;
 import de.indexcards.indexcards.repository.UserRepository;
-import org.apache.juli.logging.Log;
-import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +35,7 @@ public class CollectionsController {
     Card myCurrentCard;
     List<Card> cardsOfUser;
     ListIterator<Card> usersCardsIterator;
-    boolean addDeckExecuted = false;
+    boolean addExecuted = false;
 
     @GetMapping("/collections")
     public String getIndex(Model model) {
@@ -51,13 +48,12 @@ public class CollectionsController {
     @PostMapping("/addDeck")
     public String addDeck(@RequestParam("newDeck") String newDeck, Model model) {
 
-        if (!addDeckExecuted) {
+        if (!addExecuted) {
             deckRepository.addDeck(newDeck, myUser.getId());
             System.out.println("Deck wurde erstellt");
             myDecks = deckRepository.findDecksByUserId(myUser.getId());
-            addDeckExecuted = true;
+            addExecuted = true;
         }
-
         model.addAttribute("myUser", myUser);
         model.addAttribute("myDecks", myDecks);
         return "addDeckSuccess";
@@ -81,7 +77,6 @@ public class CollectionsController {
         }else{
             // Finde aktuelles Deck anhand der gegebenen Deck ID
             changeCurrentDeck(deckRepository.findCurrentDeckId(myUser.getId()));
-
             setCardsOfUser(model);
 
         }
@@ -129,6 +124,7 @@ public class CollectionsController {
 
     @PostMapping("/editor")
     public String editDeck(@RequestParam(name="cardId", required=false, defaultValue = "999") long cardId, @RequestParam(name="deckIdEdit", required=false, defaultValue = "999") int deckId, Model model) {
+        setUserAndDeck();
         userRepository.updateCurrDeck(myUser.getId(), deckId);
         changeCurrentDeck(deckId);
         setCardsOfUser(model);
@@ -153,9 +149,33 @@ public class CollectionsController {
         // wenn ein Deck geaddet wurde, ist der Flag immer true. Diese Hilfsfunktion wird bei jedem anderen Mapping
         // ausgeführt, sollte also dazu führen, dass das adden erneut möglich wird,
         // sobald man die "addDeck" Funktion verlässt
-        if (addDeckExecuted){
-            addDeckExecuted =false;
+        if (addExecuted){
+            addExecuted =false;
         }
+    }
+
+    @GetMapping("/create")
+    public String createNewCard(Model model) {
+        setUserAndDeck();
+        if(!addExecuted){
+            model.addAttribute("chosenDeck", myCurrentDeck);
+            addExecuted =true;
+        }
+        return "create";
+    }
+
+    @PostMapping("/create")
+    public String createACard(@RequestParam("front") String front, @RequestParam("back") String back) {
+        if(!addExecuted){
+            cardRepository.addCard(myCurrentDeck.getId(), front, back);
+            addExecuted =true;
+        }
+        return "creationSuccessful";
+    }
+
+    @GetMapping("/creationSuccessful")
+    public String returnSuccess(){
+        return "creationSuccessful";
     }
 
     private void changeCurrentDeck(int deckId){
@@ -166,36 +186,18 @@ public class CollectionsController {
         }
     }
 
-    @GetMapping("/create")
-    public String createNewCard(Model model) {
-        setUserAndDeck();
-        model.addAttribute("chosenDeck", myCurrentDeck);
-        return "create";
-    }
-
-    @PostMapping("/create")
-    public String createACard(@RequestParam("front") String front, @RequestParam("back") String back) {
-        setUserAndDeck();
-        cardRepository.addCard(myCurrentDeck.getId(), front, back);
-        return "creationSuccessful";
-    }
-
-    @PostMapping("/creationSuccessful")
-    public String addNewCard(@RequestParam("front") String front, @RequestParam("back") String back) {
-        setUserAndDeck();
-        cardRepository.addCard(myCurrentDeck.getId(), front, back);
-        return "creationSuccessful";
-    }
+//    @PostMapping("/creationSuccessful")
+//    public String addNewCard(@RequestParam("front") String front, @RequestParam("back") String back) {
+//        setUserAndDeck();
+//        cardRepository.addCard(myCurrentDeck.getId(), front, back);
+//        return "creationSuccessful";
+//    }
 
 //    @PostMapping("/creationSuccessful")
 //    public String placeholderSuccess(){
 //        return "creationSuccessful";
 //    }
 
-    @GetMapping("/creationSuccessful")
-    public String returnSuccess(){
-        return "creationSuccessful";
-    }
 
 //    @EventListener(CardRepository.class)
 //    void refreshEditor(){

@@ -14,21 +14,13 @@
     {{>layout/header}}
 
 <main>
-<h1>Your collections</h1>
-<h3>Select a collection to learn or edit.</h3>
+<h1>Your Collection</h1>
+<h3>Select a Deck to learn or edit.</h3>
 
 <p>{{myUser.userName}}'s Decks</p>
 
-    <form action="./addDeck" method="post">
-        <label class="addDeck">
-            <input type="text" id="addDeckTxt" name="newDeck" placeholder="Name for a new Deck">
-            <input type="submit" id="addDeckBtn" value="Add new Deck">
-        </label>
-    </form>
-    <br>
-    <br>
     <div class="Deck-Container">
-{{#myDecks}}
+    {{#myDecks}}
     <div class="Deck">
     <form action="./learning" method="post" id="Deck-Name">
         <button type="submit" name="deckId" value={{id}}>{{name}}</button>
@@ -37,8 +29,17 @@
         <button type="submit" name="deckIdEdit" value={{id}}>Edit Deck</button>
     </form>
     </div>
-{{/myDecks}}
-</div>
+    {{/myDecks}}
+    </div>
+    <br>
+    <br>
+    <h3>Add a new Deck here!</h3>
+    <form action="./addDeck" method="post">
+        <label class="addDeck">
+            <input type="text" id="addDeckTxt" name="newDeck" placeholder="Name for a new Deck" required>
+            <input type="submit" id="addDeckBtn" value="Add Deck">
+        </label>
+    </form>
 
 </main>
 

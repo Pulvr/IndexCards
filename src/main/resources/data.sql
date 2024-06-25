@@ -26,9 +26,9 @@ CREATE TABLE IF NOT EXISTS CARDS(
     DECK_ID     LONG NOT NULL,
     FOREIGN KEY (DECK_ID) REFERENCES DECK(ID)
 );
-
+-- Passwörter im Klartext abgespeichert natürlich nicht sicher
 INSERT INTO USERS(USERNAME, FIRSTNAME,LASTNAME,EMAIL,PASSWORD)
-VALUES  ('elondestroyer','Elon', 'isNotAGenius', 'justHadMoneyAtTheRightTime@bla', 'password123'),
+VALUES  ('elon','Elon', 'isNotAGenius', 'justHadMoneyAtTheRightTime@bla', 'password123'),
         ('LisanAlGaib','Paul', 'Atreides', 'spice@stuff.com', 'brummsibumm'),
         ('Amelia','Vicar', 'Amelia', 'GoatDeer@Yharnham.com', 'screaming'),
         ('john','fu', 'fara', 'john@doe.com', 'mypw');

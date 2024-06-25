@@ -18,8 +18,8 @@
     <h3>Add new index cards to your active collection, edit existing ones or delete cards you don't need anymore.</h3>
     <br>
     <h3>Your current Deck is {{chosenDeck.name}}.</h3>
-    <h3>Select a card to edit:</h3>
-
+    <h3>Select a card to delete or edit:</h3>
+    <br>
     <div class="scrolling-wrapper">
         {{#cardsOfUser}}
         <div class="card-editor">
@@ -34,15 +34,22 @@
         {{/cardsOfUser}}
     </div>
 
+    <h3>Add a new Card to your Deck!</h3>
+    <form action="./create" method="post" class="addCard">
+        <input type="text" name="front" placeholder="Front of Card" required>
+        <input type="text" name="back" placeholder="Back of Card" required>
+        <button type="submit" class="Main-Button">Add this card to the {{chosenDeck.name}} Deck</button>
+    </form>
+    <!--
     <form action="./create" method="post" class="Main-Button">
         <button onclick="MyWindow=window.open('./create','cardCreation','width=600,height=300'); return false;">Create a new card
-            <!--span class="popuptext" id="popupCreator">
+            span class="popuptext" id="popupCreator">
                 Enter text for your new index card here:
-            </span-->
+            </span
         </button>
     </form>
+    -->
 
-    <!--button>Add this card to [active deck]</button-->
 </main>
 
 <footer>
