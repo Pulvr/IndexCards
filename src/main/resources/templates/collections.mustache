@@ -17,7 +17,16 @@
 <h3>Select a collection to learn or edit.</h3>
 
 <p>{{myUser.userName}}'s Decks</p>
-<div class="Deck-Container">
+
+    <form action="./addDeck" method="post">
+        <label>
+            <input type="text" name="newDeck" placeholder="Name for a new Deck">
+            <input type="submit" value="Add new Deck">
+        </label>
+    </form>
+    <br>
+    <br>
+    <div class="Deck-Container">
 {{#myDecks}}
     <div class="Deck">
     <form action="./learning" method="post" id="Deck-Name">
