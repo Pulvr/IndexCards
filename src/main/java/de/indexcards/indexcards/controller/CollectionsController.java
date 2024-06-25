@@ -77,7 +77,7 @@ public class CollectionsController {
        setUserAndDeck();
         //Wenn Current ID = 0 ist (default wert) dann hat der User kein Deck ausgewählt, also kein Deck ausgeben.
         if (deckRepository.findCurrentDeckId(myUser.getId()) == 0) {
-            model.addAttribute("emptyDeck", "Kein Deck ausgewählt");
+            model.addAttribute("emptyDeck", "There was no deck curently selected, please pick one from your collection");
         }else{
             // Finde aktuelles Deck anhand der gegebenen Deck ID
             changeCurrentDeck(deckRepository.findCurrentDeckId(myUser.getId()));
@@ -97,7 +97,7 @@ public class CollectionsController {
             model.addAttribute("cardsOfUser", myCurrentCard);
         }else{
             model.addAttribute("chosenDeck", myCurrentDeck);
-            model.addAttribute("cardsEmpty", "no cards in deck, add cards under \" edit Deck\" first");
+            model.addAttribute("cardsEmpty", "No cards in deck, add cards in \"edit Deck\" first");
         }
     }
 
