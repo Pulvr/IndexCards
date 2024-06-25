@@ -149,3 +149,41 @@ main {
     margin: 3px;
     background-color: var(--darkgray);
 }
+.addDeck{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--darkgray);
+    padding: 5px;
+    border-radius: 15px;
+    height: 40px;
+
+}
+.addDeck #addDeckTxt{
+    text-decoration: none;
+    border: none;
+    background-color: var(--lightgray);
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    height: 97%;
+    margin: 2px;
+    outline: none;
+    font-size: 1.2rem;
+    color: var(--white);
+
+}
+.addDeck #addDeckBtn{
+    border: none;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: var(--lightgray);
+    height: 100%;
+    margin: 2px;
+    color: var(--white);
+}
+.addDeck #addDeckBtn:hover{
+    border: 2px solid var(--accent1);
+    margin-left: 0;
+    margin-right: 0;
+}

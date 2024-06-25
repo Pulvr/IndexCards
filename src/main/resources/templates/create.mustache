@@ -5,23 +5,17 @@
     <title>Create a new card</title>
     <!--script src="http://localhost:35729/livereload.js" async></script-->
     <link rel="stylesheet" href="./styles.css">
-    <link rel="icon" type="image/x-icon" href="./icon.png">
+    <link rel="stylesheet" href="./editor.css">
 </head>
 
 <body>
-
-<form action="./creationSuccessful" method="post">
-    <label>
-        Front side:
-        <input type="text" name="front" placeholder="Enter text here" required>
-        <br>
-        Back side:
-        <input type="text" name="back" placeholder="Enter text here" required>
-    </label>
-    <br>
-    <br>
-    <button type="submit">Add this card to {{chosenDeck.name}}</button>
+<main>
+<form action="./creationSuccessful" method="post" class="addCard">
+    <input type="text" name="front" placeholder="Enter text here" required>
+    <input type="text" name="back" placeholder="Enter text here" required>
+    <button type="submit" class="Main-Button">Add this card to {{chosenDeck.name}}</button>
 </form>
+</main>
 
 <!--form action="./creationSuccessful" method="get">
     <button type="submit">Testing button</button>

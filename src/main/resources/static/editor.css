@@ -70,8 +70,8 @@
 }
 
 .editbtns button{
-    height: 85%;
-    width: 80%;
+    height: 45px;
+    width: 80px;
     border-radius: 10px;
     border: none;
     margin: 3px;
@@ -82,4 +82,35 @@
 .editbtns button:hover {
     transform: scale(1.05);
     border: solid 3px var(--accent1);
+}
+
+.addCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    vertical-align: center;
+    background-color: var(--darkgray);
+    padding: 15px;
+    border-radius: 15px;
+;
+}
+.addCard input{
+    text-decoration: none;
+    border: none;
+    background-color: var(--lightgray);
+    height: 100%;
+    width: auto;
+    margin: 2px;
+    outline: none;
+    font-size: 2rem;
+    color: var(--white);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+.addCard button{
+    background-color: var(--lightgray);
+    margin: 0;
+    width: auto;
+    height: 2rem;
 }
